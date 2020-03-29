@@ -7,6 +7,8 @@ public class AudioVisualization : MonoBehaviour
     AudioSource audioSource;
     Renderer renderer;
 
+    bool visited = false;
+
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
@@ -15,9 +17,26 @@ public class AudioVisualization : MonoBehaviour
 
     void Update()
     {
-        float completedRatio = audioSource.time / audioSource.clip.length;
-        Vector4 newEmissionColor = new Vector4(completedRatio, 0.8524f, 0f, 1.0f);
-        Debug.Log(newEmissionColor);
-        renderer.material.SetColor("_EmissionColor", newEmissionColor);
+        renderer.material.SetColor("_EmissionColor", new Vector4(visited ? 1.0f : 0.0f, 0.8524f, 0f, 1.0f));
+
+        var isPlayerClose = CheckCloseToTag("MainCamera", 20);
+        if (isPlayerClose) {
+            visited = true;
+        }
+    }
+
+
+
+    bool CheckCloseToTag(string tag, float minimumDistance)
+    {
+        GameObject[] goWithTag = GameObject.FindGameObjectsWithTag(tag);
+    
+        for (int i = 0; i < goWithTag.Length; ++i)
+        {
+            if (Vector3.Distance(transform.position, goWithTag[i].transform.position) <= minimumDistance)
+                return true;
+        }
+    
+        return false;
     }
 }
