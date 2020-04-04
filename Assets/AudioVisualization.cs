@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class AudioVisualization : MonoBehaviour
 {
@@ -13,6 +14,8 @@ public class AudioVisualization : MonoBehaviour
 
     public Color startColor;
     public Vector4 endColor = new Vector4(1f, 0.8524641f, 0f, 0f);
+
+    public UnityEvent trackPlayed;
 
     void Start()
     {
@@ -27,6 +30,7 @@ public class AudioVisualization : MonoBehaviour
         if (isPlayerClose && !visited) {
             StartCoroutine(VisitedFade());
             visited = true;
+            trackPlayed.Invoke();
         }
     }
 
