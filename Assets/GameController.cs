@@ -22,7 +22,7 @@ public class GameController : MonoBehaviour
 
     private void SetDisplayMessage() {
         int tracksRemaining = totalTracks - playedTracks.Count;
-        string message = tracksRemaining > 0 ? tracksRemaining.ToString() : "Thank you for listening."
+        string message = tracksRemaining > 0 ? tracksRemaining.ToString() : "Thank you for listening.";
         updateDisplay.Invoke(message);
     }
 }
