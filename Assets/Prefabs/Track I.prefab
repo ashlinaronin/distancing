@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6901027212417586363}
   - component: {fileID: 2345747166238538096}
   m_Layer: 0
-  m_Name: Capsule
+  m_Name: PlayerSizeCapsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -108,7 +108,7 @@ GameObject:
   - component: {fileID: 3969671937504977854}
   - component: {fileID: 8223479713609061272}
   m_Layer: 9
-  m_Name: Capsule
+  m_Name: MinimapCapsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

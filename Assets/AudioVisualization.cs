@@ -6,7 +6,7 @@ using UnityEngine.Events;
 public class AudioVisualization : MonoBehaviour
 {
     AudioSource audioSource;
-    Renderer renderer;
+    Renderer[] childRenderers;
 
     bool visited = false;
 
@@ -20,7 +20,7 @@ public class AudioVisualization : MonoBehaviour
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
-        renderer = GetComponentInChildren<Renderer>();
+        childRenderers = GetComponentsInChildren<Renderer>();
         startColor = renderer.material.GetColor("_EmissionColor");
     }
 
@@ -41,7 +41,12 @@ public class AudioVisualization : MonoBehaviour
         while (t < fadeSeconds)
         {
             t += Time.deltaTime;
-            renderer.material.SetColor("_EmissionColor", Color.Lerp(startColor, endColor, t / fadeSeconds));
+            
+            foreach (Renderer childRenderer in childRenderers)
+            {
+                childRenderer.material.SetColor("_EmissionColor", Color.Lerp(startColor, endColor, t / fadeSeconds));
+            }
+
             yield return null;
         }
     }
