@@ -13,7 +13,7 @@ public class AudioVisualization : MonoBehaviour
     public int fadeSeconds = 4;
 
     public Color startColor;
-    public Vector4 endColor = new Vector4(1f, 0.8524641f, 0f, 0f);
+    public Color endColor = new Color(0f, 0f, 0f, 0f);
 
     public UnityEvent trackPlayed;
 
