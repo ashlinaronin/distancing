@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -15,7 +16,15 @@ public class AudioVisualization : MonoBehaviour
     public Color startColor;
     public Color endColor = new Color(0f, 0f, 0f, 0f);
 
+
+    // if we want to store these values for other processing, we should use a different event type
+    // but for now, let's just pass the display value directly to the ui text
+    [Serializable]
+    public class TrackListenedEvent : UnityEvent<string>{};
+
     public UnityEvent trackPlayed;
+
+    public TrackListenedEvent trackListened;
 
     void Start()
     {
@@ -29,10 +38,21 @@ public class AudioVisualization : MonoBehaviour
     void Update()
     {
         var isPlayerClose = CheckCloseToTag("MainCamera", 20);
+
+        // initial visit to this beacon
         if (isPlayerClose && !visited) {
             StartCoroutine(VisitedFade());
             visited = true;
             trackPlayed.Invoke();
+        }
+
+        // subsequent frames while listening to this beacon
+        if (isPlayerClose && visited) {
+            int currentTime = (int)Math.Ceiling(audioSource.time);
+            int length = (int)Math.Ceiling(audioSource.clip.length);
+
+            // todo: specify which track
+            trackListened.Invoke($"{currentTime} / {length}s");
         }
     }
 
