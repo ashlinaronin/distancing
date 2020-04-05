@@ -21,7 +21,9 @@ public class AudioVisualization : MonoBehaviour
     {
         audioSource = GetComponent<AudioSource>();
         childRenderers = GetComponentsInChildren<Renderer>();
-        startColor = renderer.material.GetColor("_EmissionColor");
+
+        // for our purposes, we will assume both children have the same material/color
+        startColor = childRenderers[0].material.GetColor("_EmissionColor");
     }
 
     void Update()
