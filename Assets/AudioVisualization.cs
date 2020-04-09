@@ -63,6 +63,10 @@ public class AudioVisualization : MonoBehaviour
         }
     }
 
+    public int GetLength() {
+        return (int)Math.Ceiling(audioSource.clip.length);
+    }
+
     IEnumerator VisitedFade()
     {
         float t = 0f;

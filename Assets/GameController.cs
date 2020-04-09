@@ -7,14 +7,29 @@ using UnityEngine.Events;
 public class GameController : MonoBehaviour
 {
     public int totalTracks = 9;
+
+    private int totalSecondsAvailable = 0;
     public List<int> playedTracks = new List<int>();
 
-    public Dictionary<int,HashSet<int>> playedMinutes = new Dictionary<int,HashSet<int>>();
+    public Dictionary<int,HashSet<int>> playedSeconds = new Dictionary<int,HashSet<int>>();
 
     [Serializable]
     public class StringEvent : UnityEvent<string>{};
 
     public StringEvent updateDisplay;
+
+    void Start()
+    {
+        var allAudioBeacons = FindObjectsOfType<AudioVisualization>();
+        Debug.Log(allAudioBeacons + " : " + allAudioBeacons.Length);
+        
+        foreach (AudioVisualization audioBeacon in allAudioBeacons)
+        {
+            totalSecondsAvailable += audioBeacon.GetLength();
+            Debug.Log("totalSeconds: " + totalSecondsAvailable);
+        }
+        SetDisplayMessage();
+    }
 
     public void SetTrackPlayed(int trackNumber)
     {
@@ -24,31 +39,30 @@ public class GameController : MonoBehaviour
 
     public void SetMinutePlayed(int trackNumber, int minutePlayed)
     {
-        if (!playedMinutes.ContainsKey(trackNumber)) {
-            playedMinutes[trackNumber] = new HashSet<int>();
+        if (!playedSeconds.ContainsKey(trackNumber)) {
+            playedSeconds[trackNumber] = new HashSet<int>();
         }
 
-        playedMinutes[trackNumber].Add(minutePlayed);
+        playedSeconds[trackNumber].Add(minutePlayed);
         SetDisplayMessage();
-        // Debug.Log(playedMinutes[trackNumber].ToArray());
-        //Debug.Log(string.Join("", playedMinutes[trackNumber]));
     }
 
     private void SetDisplayMessage() {
-        int totalMinutes = 0;
+        int totalSecondsPlayed = 0;
 
-        foreach (KeyValuePair<int,HashSet<int>> track in playedMinutes)
+        foreach (KeyValuePair<int,HashSet<int>> track in playedSeconds)
         {
             foreach (int minute in track.Value)
             {
-                Debug.Log("minute" + " " + minute);
-                totalMinutes++;
+                totalSecondsPlayed++;
             }
         }
 
-        Debug.Log(totalMinutes);
+        Debug.Log(totalSecondsPlayed);
 
-        string message = totalMinutes.ToString();
+        Debug.Log("available now: " + totalSecondsAvailable.ToString());
+
+        string message = $"{totalSecondsPlayed.ToString()} / {totalSecondsAvailable.ToString()}";
         updateDisplay.Invoke(message);
 
         // int tracksRemaining = totalTracks - playedTracks.Count;
