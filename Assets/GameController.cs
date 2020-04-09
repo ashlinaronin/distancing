@@ -20,13 +20,10 @@ public class GameController : MonoBehaviour
 
     void Start()
     {
-        var allAudioBeacons = FindObjectsOfType<AudioVisualization>();
-        Debug.Log(allAudioBeacons + " : " + allAudioBeacons.Length);
-        
+        var allAudioBeacons = FindObjectsOfType<AudioVisualization>();        
         foreach (AudioVisualization audioBeacon in allAudioBeacons)
         {
             totalSecondsAvailable += audioBeacon.GetLength();
-            Debug.Log("totalSeconds: " + totalSecondsAvailable);
         }
         SetDisplayMessage();
     }
@@ -58,15 +55,7 @@ public class GameController : MonoBehaviour
             }
         }
 
-        Debug.Log(totalSecondsPlayed);
-
-        Debug.Log("available now: " + totalSecondsAvailable.ToString());
-
         string message = $"{totalSecondsPlayed.ToString()} / {totalSecondsAvailable.ToString()}";
         updateDisplay.Invoke(message);
-
-        // int tracksRemaining = totalTracks - playedTracks.Count;
-        // string message = tracksRemaining > 0 ? tracksRemaining.ToString() : "Thank you for listening.";
-        // updateDisplay.Invoke(message);
     }
 }
