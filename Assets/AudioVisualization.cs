@@ -9,6 +9,8 @@ public class AudioVisualization : MonoBehaviour
     AudioSource audioSource;
     Renderer[] childRenderers;
 
+    public int trackNumber;
+
     bool visited = false;
 
     public int fadeSeconds = 4;
@@ -22,9 +24,14 @@ public class AudioVisualization : MonoBehaviour
     [Serializable]
     public class TrackListenedEvent : UnityEvent<string>{};
 
+    [Serializable]
+    public class MinuteListenedEvent : UnityEvent<int,int>{};
+
     public UnityEvent trackPlayed;
 
     public TrackListenedEvent trackListened;
+
+    public MinuteListenedEvent minuteListened;
 
     void Start()
     {
@@ -51,8 +58,8 @@ public class AudioVisualization : MonoBehaviour
             int currentTime = (int)Math.Ceiling(audioSource.time);
             int length = (int)Math.Ceiling(audioSource.clip.length);
 
-            // todo: specify which track
             trackListened.Invoke($"{currentTime} / {length}s");
+            minuteListened.Invoke(trackNumber, currentTime);
         }
     }
 
