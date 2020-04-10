@@ -9,8 +9,7 @@ public class GameController : MonoBehaviour
     public int totalTracks = 9;
 
     private int totalSecondsAvailable = 0;
-    public List<int> playedTracks = new List<int>();
-
+    
     public Dictionary<int,HashSet<int>> playedSeconds = new Dictionary<int,HashSet<int>>();
 
     [Serializable]
@@ -25,12 +24,6 @@ public class GameController : MonoBehaviour
         {
             totalSecondsAvailable += audioBeacon.GetLength();
         }
-        SetDisplayMessage();
-    }
-
-    public void SetTrackPlayed(int trackNumber)
-    {
-        playedTracks.Add(trackNumber);
         SetDisplayMessage();
     }
 

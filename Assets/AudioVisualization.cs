@@ -18,18 +18,8 @@ public class AudioVisualization : MonoBehaviour
     public Color startColor;
     public Color endColor = new Color(0f, 0f, 0f, 0f);
 
-
-    // if we want to store these values for other processing, we should use a different event type
-    // but for now, let's just pass the display value directly to the ui text
-    [Serializable]
-    public class TrackListenedEvent : UnityEvent<string>{};
-
     [Serializable]
     public class MinuteListenedEvent : UnityEvent<int,int>{};
-
-    public UnityEvent trackPlayed;
-
-    public TrackListenedEvent trackListened;
 
     public MinuteListenedEvent minuteListened;
 
@@ -50,7 +40,6 @@ public class AudioVisualization : MonoBehaviour
         if (isPlayerClose && !visited) {
             StartCoroutine(VisitedFade());
             visited = true;
-            trackPlayed.Invoke();
         }
 
         // subsequent frames while listening to this beacon
@@ -58,7 +47,6 @@ public class AudioVisualization : MonoBehaviour
             int currentTime = (int)Math.Ceiling(audioSource.time);
             int length = (int)Math.Ceiling(audioSource.clip.length);
 
-            trackListened.Invoke($"{currentTime} / {length}s");
             minuteListened.Invoke(trackNumber, currentTime);
         }
     }
