@@ -23,7 +23,7 @@ public class AudioVisualization : MonoBehaviour
 
     public MinuteListenedEvent minuteListened;
 
-    void Start()
+    void Awake()
     {
         audioSource = GetComponent<AudioSource>();
         childRenderers = GetComponentsInChildren<Renderer>();
@@ -52,7 +52,7 @@ public class AudioVisualization : MonoBehaviour
     }
 
     public int GetLength() {
-        return (int)Math.Ceiling(audioSource.clip.length);
+        return audioSource ? (int)Math.Ceiling(audioSource.clip.length) : 0;
     }
 
     IEnumerator VisitedFade()
