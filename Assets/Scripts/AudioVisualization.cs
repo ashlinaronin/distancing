@@ -17,6 +17,8 @@ public class AudioVisualization : MonoBehaviour
 
     public Color startColor;
     public Color endColor = new Color(0f, 0f, 0f, 0f);
+    public Vector4 startOffset = new Vector4(1f, 0.5f, 0f, 0f);
+    public Vector4 endOffset = new Vector4(1f, 0.5f, 0f, 0.5f);
 
     [Serializable]
     public class MinuteListenedEvent : UnityEvent<int,int>{};
@@ -55,12 +57,9 @@ public class AudioVisualization : MonoBehaviour
         return audioSource ? (int)Math.Ceiling(audioSource.clip.length) : 0;
     }
 
-// then get the old color emission effect back
 // then tie it to the minutes/total listened instead of fadeSeconds
     IEnumerator VisitedFade()
     {
-        Vector4 startOffset = new Vector4(1f, 0.5f, 0f, 0f);
-        Vector4 endOffset = new Vector4(1f, 0.5f, 0f, 0.5f);
         float t = 0f;
 
         while (t < fadeSeconds)
@@ -71,6 +70,9 @@ public class AudioVisualization : MonoBehaviour
             {
                 // _BaseMap_ST is a 4d vector containing tiling and offset (for URP/Lit)
                 childRenderer.material.SetVector("_BaseMap_ST", Vector4.Lerp(startOffset, endOffset, t / fadeSeconds));
+
+                // also fade emission color
+                childRenderer.material.SetColor("_EmissionColor", Color.Lerp(startColor, endColor, t / fadeSeconds));
             }
 
             yield return null;
