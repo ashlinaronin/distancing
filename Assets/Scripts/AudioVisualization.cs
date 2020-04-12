@@ -60,7 +60,6 @@ public class AudioVisualization : MonoBehaviour
 
     // todo: now fade is jerky because we are only tracking minutes  
     // probably could then also refactor the way we send events to the game controller, but that can wait til after it's working
-    // also todo: make the effect look nicer. the dark green is not nice. may have to resort to digging into shader graph...
     private void VisualizeListenedProgress(float currentTime, float length) {
         float t = playedSeconds.Count / length;
 
@@ -68,9 +67,6 @@ public class AudioVisualization : MonoBehaviour
         {
             // _BaseMap_ST is a 4d vector containing tiling and offset (for URP/Lit)
             childRenderer.material.SetVector("_BaseMap_ST", Vector4.Lerp(startOffset, endOffset, t));
-
-            // also fade emission color
-            // childRenderer.material.SetColor("_EmissionColor", Color.Lerp(startColor, endColor, t));
         }
     }
 
