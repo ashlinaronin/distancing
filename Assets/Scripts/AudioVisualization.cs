@@ -40,16 +40,34 @@ public class AudioVisualization : MonoBehaviour
 
         // initial visit to this beacon
         if (isPlayerClose && !visited) {
-            StartCoroutine(VisitedFade());
+            // StartCoroutine(VisitedFade());
             visited = true;
         }
 
         // subsequent frames while listening to this beacon
         if (isPlayerClose && visited) {
-            int currentTime = (int)Math.Ceiling(audioSource.time);
-            int length = (int)Math.Ceiling(audioSource.clip.length);
+            int currentTimeRounded = (int)Math.Ceiling(audioSource.time);
+            int lengthRounded = (int)Math.Ceiling(audioSource.clip.length);
 
-            minuteListened.Invoke(trackNumber, currentTime);
+            minuteListened.Invoke(trackNumber, currentTimeRounded);
+            VisualizeListenedProgress(audioSource.time, audioSource.clip.length);
+        }
+    }
+
+    // todo: track current seconds listened for this track in this script, so we can show progress not of position/length,
+    // but of seconds listened / total seconds
+    // probably could then also refactor the way we send events to the game controller, but that can wait til after it's working
+    // also todo: make the effect look nicer. the dark green is not nice. may have to resort to digging into shader graph...
+    private void VisualizeListenedProgress(float currentTime, float length) {
+        float t = currentTime / length;
+
+        foreach (Renderer childRenderer in childRenderers)
+        {
+            // _BaseMap_ST is a 4d vector containing tiling and offset (for URP/Lit)
+            childRenderer.material.SetVector("_BaseMap_ST", Vector4.Lerp(startOffset, endOffset, t));
+
+            // also fade emission color
+            childRenderer.material.SetColor("_EmissionColor", Color.Lerp(startColor, endColor, t));
         }
     }
 
