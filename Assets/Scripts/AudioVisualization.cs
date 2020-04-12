@@ -11,6 +11,8 @@ public class AudioVisualization : MonoBehaviour
 
     public int trackNumber;
 
+    public HashSet<int> playedSeconds = new HashSet<int>();
+
     bool visited = false;
 
     public int fadeSeconds = 4;
@@ -40,7 +42,6 @@ public class AudioVisualization : MonoBehaviour
 
         // initial visit to this beacon
         if (isPlayerClose && !visited) {
-            // StartCoroutine(VisitedFade());
             visited = true;
         }
 
@@ -49,17 +50,19 @@ public class AudioVisualization : MonoBehaviour
             int currentTimeRounded = (int)Math.Ceiling(audioSource.time);
             int lengthRounded = (int)Math.Ceiling(audioSource.clip.length);
 
+            playedSeconds.Add(currentTimeRounded);
+
+            // todo: eventually refactor to just send all the minutes from each beacon so we don't track it in two places?
             minuteListened.Invoke(trackNumber, currentTimeRounded);
             VisualizeListenedProgress(audioSource.time, audioSource.clip.length);
         }
     }
 
-    // todo: track current seconds listened for this track in this script, so we can show progress not of position/length,
-    // but of seconds listened / total seconds
+    // todo: now fade is jerky because we are only tracking minutes  
     // probably could then also refactor the way we send events to the game controller, but that can wait til after it's working
     // also todo: make the effect look nicer. the dark green is not nice. may have to resort to digging into shader graph...
     private void VisualizeListenedProgress(float currentTime, float length) {
-        float t = currentTime / length;
+        float t = playedSeconds.Count / length;
 
         foreach (Renderer childRenderer in childRenderers)
         {
@@ -67,37 +70,13 @@ public class AudioVisualization : MonoBehaviour
             childRenderer.material.SetVector("_BaseMap_ST", Vector4.Lerp(startOffset, endOffset, t));
 
             // also fade emission color
-            childRenderer.material.SetColor("_EmissionColor", Color.Lerp(startColor, endColor, t));
+            // childRenderer.material.SetColor("_EmissionColor", Color.Lerp(startColor, endColor, t));
         }
     }
 
     public int GetLength() {
         return audioSource ? (int)Math.Ceiling(audioSource.clip.length) : 0;
     }
-
-// then tie it to the minutes/total listened instead of fadeSeconds
-    IEnumerator VisitedFade()
-    {
-        float t = 0f;
-
-        while (t < fadeSeconds)
-        {
-            t += Time.deltaTime;
-            
-            foreach (Renderer childRenderer in childRenderers)
-            {
-                // _BaseMap_ST is a 4d vector containing tiling and offset (for URP/Lit)
-                childRenderer.material.SetVector("_BaseMap_ST", Vector4.Lerp(startOffset, endOffset, t / fadeSeconds));
-
-                // also fade emission color
-                childRenderer.material.SetColor("_EmissionColor", Color.Lerp(startColor, endColor, t / fadeSeconds));
-            }
-
-            yield return null;
-        }
-    }
-
-
 
     bool CheckCloseToTag(string tag, float minimumDistance)
     {

@@ -42,10 +42,7 @@ public class GameController : MonoBehaviour
 
         foreach (KeyValuePair<int,HashSet<int>> track in playedSeconds)
         {
-            foreach (int minute in track.Value)
-            {
-                totalSecondsPlayed++;
-            }
+            totalSecondsPlayed += track.Value.Count;
         }
 
         string message = $"{totalSecondsPlayed.ToString()} / {totalSecondsAvailable.ToString()}";
