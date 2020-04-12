@@ -6,11 +6,9 @@ using UnityEngine.Events;
 
 public class GameController : MonoBehaviour
 {
-    public int totalTracks = 9;
-
     private int totalSecondsAvailable = 0;
     
-    public Dictionary<int,HashSet<int>> playedSeconds = new Dictionary<int,HashSet<int>>();
+    public Dictionary<int,int> trackSecondsPlayed = new Dictionary<int,int>();
 
     [Serializable]
     public class StringEvent : UnityEvent<string>{};
@@ -27,22 +25,18 @@ public class GameController : MonoBehaviour
         SetDisplayMessage();
     }
 
-    public void SetMinutePlayed(int trackNumber, int minutePlayed)
+    public void SetTrackSecondsPlayed(int trackNumber, int secondsPlayed)
     {
-        if (!playedSeconds.ContainsKey(trackNumber)) {
-            playedSeconds[trackNumber] = new HashSet<int>();
-        }
-
-        playedSeconds[trackNumber].Add(minutePlayed);
+        trackSecondsPlayed[trackNumber] = secondsPlayed;
         SetDisplayMessage();
     }
 
     private void SetDisplayMessage() {
         int totalSecondsPlayed = 0;
 
-        foreach (KeyValuePair<int,HashSet<int>> track in playedSeconds)
+        foreach (KeyValuePair<int,int> track in trackSecondsPlayed)
         {
-            totalSecondsPlayed += track.Value.Count;
+            totalSecondsPlayed += track.Value;
         }
 
         string message = $"{totalSecondsPlayed.ToString()} / {totalSecondsAvailable.ToString()}";

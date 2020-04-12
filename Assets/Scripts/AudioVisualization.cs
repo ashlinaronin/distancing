@@ -11,29 +11,22 @@ public class AudioVisualization : MonoBehaviour
 
     public int trackNumber;
 
-    public HashSet<int> playedSeconds = new HashSet<int>();
+    public float playedSeconds = 0f;
 
     bool visited = false;
 
-    public int fadeSeconds = 4;
-
-    public Color startColor;
-    public Color endColor = new Color(0f, 0f, 0f, 0f);
     public Vector4 startOffset = new Vector4(1f, 0.5f, 0f, 0f);
     public Vector4 endOffset = new Vector4(1f, 0.5f, 0f, 0.5f);
 
     [Serializable]
-    public class MinuteListenedEvent : UnityEvent<int,int>{};
+    public class TrackListenedEvent : UnityEvent<int,int>{};
 
-    public MinuteListenedEvent minuteListened;
+    public TrackListenedEvent secondListened;
 
     void Awake()
     {
         audioSource = GetComponent<AudioSource>();
         childRenderers = GetComponentsInChildren<Renderer>();
-
-        // for our purposes, we will assume both children have the same material/color
-        startColor = childRenderers[0].material.GetColor("_EmissionColor");
     }
 
     void Update()
@@ -46,22 +39,17 @@ public class AudioVisualization : MonoBehaviour
         }
 
         // subsequent frames while listening to this beacon
-        if (isPlayerClose && visited) {
-            int currentTimeRounded = (int)Math.Ceiling(audioSource.time);
-            int lengthRounded = (int)Math.Ceiling(audioSource.clip.length);
+        if (isPlayerClose && visited && playedSeconds <= audioSource.clip.length) {
+            // add the number of seconds since the last frame
+            playedSeconds += Time.deltaTime;
 
-            playedSeconds.Add(currentTimeRounded);
-
-            // todo: eventually refactor to just send all the minutes from each beacon so we don't track it in two places?
-            minuteListened.Invoke(trackNumber, currentTimeRounded);
-            VisualizeListenedProgress(audioSource.time, audioSource.clip.length);
+            secondListened.Invoke(trackNumber, (int)Math.Ceiling(playedSeconds));
+            VisualizeListenedProgress();
         }
     }
 
-    // todo: now fade is jerky because we are only tracking minutes  
-    // probably could then also refactor the way we send events to the game controller, but that can wait til after it's working
-    private void VisualizeListenedProgress(float currentTime, float length) {
-        float t = playedSeconds.Count / length;
+    private void VisualizeListenedProgress() {
+        float t = playedSeconds / audioSource.clip.length;
 
         foreach (Renderer childRenderer in childRenderers)
         {
