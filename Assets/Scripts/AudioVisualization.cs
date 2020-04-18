@@ -15,6 +15,8 @@ public class AudioVisualization : MonoBehaviour
 
     bool visited = false;
 
+    private const int listeningThreshold = 25;
+
     private Vector4 startOffset = new Vector4(1f, 0.5f, 0f, 0f);
 
     // slightly over 0.5 eliminates the seams on either pole of the capsule
@@ -33,7 +35,7 @@ public class AudioVisualization : MonoBehaviour
 
     void Update()
     {
-        var isPlayerClose = CheckCloseToTag("MainCamera", 20);
+        var isPlayerClose = CheckCloseToTag("MainCamera", listeningThreshold);
 
         // if player isn't close, we don't want to do anything else
         if (!isPlayerClose) return;
