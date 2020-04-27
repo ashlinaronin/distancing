@@ -39,7 +39,7 @@ public class GameController : MonoBehaviour
             totalSecondsPlayed += track.Value;
         }
 
-        string message = $"{totalSecondsPlayed.ToString()} / {totalSecondsAvailable.ToString()}";
+        string message = $"{totalSecondsPlayed.ToString()}/{totalSecondsAvailable.ToString()}";
         updateDisplay.Invoke(message);
     }
 }
