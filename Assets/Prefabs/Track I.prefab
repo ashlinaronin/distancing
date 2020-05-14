@@ -17,7 +17,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &294144121839991599
 Transform:
@@ -110,7 +110,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &499398339577882949
 Transform:
@@ -334,9 +334,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   trackNumber: 0
-  fadeSeconds: 4
-  startColor: {r: 0, g: 0, b: 0, a: 0}
-  endColor: {r: 0, g: 0, b: 0, a: 0}
-  minuteListened:
+  playedSeconds: 0
+  secondListened:
     m_PersistentCalls:
       m_Calls: []
