@@ -258,6 +258,11 @@ PrefabInstance:
       propertyPath: secondListened.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 6075846575156898294, guid: ceaa7d4fa9245410c98acfd3606a2666,
+        type: 3}
+      propertyPath: mainCamera
+      value: 
+      objectReference: {fileID: 1791418714}
     - target: {fileID: 9037129871006180924, guid: ceaa7d4fa9245410c98acfd3606a2666,
         type: 3}
       propertyPath: m_Name
@@ -730,6 +735,11 @@ PrefabInstance:
       propertyPath: secondListened.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 6075846575156898294, guid: ceaa7d4fa9245410c98acfd3606a2666,
+        type: 3}
+      propertyPath: mainCamera
+      value: 
+      objectReference: {fileID: 1791418714}
     - target: {fileID: 7313042100971279561, guid: ceaa7d4fa9245410c98acfd3606a2666,
         type: 3}
       propertyPath: m_IsActive
@@ -1183,6 +1193,11 @@ PrefabInstance:
       propertyPath: secondListened.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 6075846575156898294, guid: ceaa7d4fa9245410c98acfd3606a2666,
+        type: 3}
+      propertyPath: mainCamera
+      value: 
+      objectReference: {fileID: 1791418714}
     - target: {fileID: 9037129871006180924, guid: ceaa7d4fa9245410c98acfd3606a2666,
         type: 3}
       propertyPath: m_Name
@@ -1916,6 +1931,11 @@ PrefabInstance:
       propertyPath: secondListened.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 6075846575156898294, guid: ceaa7d4fa9245410c98acfd3606a2666,
+        type: 3}
+      propertyPath: mainCamera
+      value: 
+      objectReference: {fileID: 1791418714}
     - target: {fileID: 7313042100971279561, guid: ceaa7d4fa9245410c98acfd3606a2666,
         type: 3}
       propertyPath: m_IsActive
@@ -2225,6 +2245,11 @@ PrefabInstance:
       propertyPath: secondListened.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 6075846575156898294, guid: ceaa7d4fa9245410c98acfd3606a2666,
+        type: 3}
+      propertyPath: mainCamera
+      value: 
+      objectReference: {fileID: 1791418714}
     - target: {fileID: 9037129871006180924, guid: ceaa7d4fa9245410c98acfd3606a2666,
         type: 3}
       propertyPath: m_Name
@@ -2590,6 +2615,11 @@ PrefabInstance:
       propertyPath: secondListened.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 6075846575156898294, guid: ceaa7d4fa9245410c98acfd3606a2666,
+        type: 3}
+      propertyPath: mainCamera
+      value: 
+      objectReference: {fileID: 1791418714}
     - target: {fileID: 9037129871006180924, guid: ceaa7d4fa9245410c98acfd3606a2666,
         type: 3}
       propertyPath: m_Name
@@ -2806,6 +2836,11 @@ PrefabInstance:
       propertyPath: secondListened.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 6075846575156898294, guid: ceaa7d4fa9245410c98acfd3606a2666,
+        type: 3}
+      propertyPath: mainCamera
+      value: 
+      objectReference: {fileID: 1791418714}
     - target: {fileID: 7313042100971279561, guid: ceaa7d4fa9245410c98acfd3606a2666,
         type: 3}
       propertyPath: m_IsActive
@@ -3027,6 +3062,11 @@ PrefabInstance:
       propertyPath: secondListened.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 6075846575156898294, guid: ceaa7d4fa9245410c98acfd3606a2666,
+        type: 3}
+      propertyPath: mainCamera
+      value: 
+      objectReference: {fileID: 1791418714}
     - target: {fileID: 9037129871006180924, guid: ceaa7d4fa9245410c98acfd3606a2666,
         type: 3}
       propertyPath: m_Name
@@ -3494,6 +3534,11 @@ PrefabInstance:
       propertyPath: secondListened.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 6075846575156898294, guid: ceaa7d4fa9245410c98acfd3606a2666,
+        type: 3}
+      propertyPath: mainCamera
+      value: 
+      objectReference: {fileID: 1791418714}
     - target: {fileID: 6901027212417586363, guid: ceaa7d4fa9245410c98acfd3606a2666,
         type: 3}
       propertyPath: m_Materials.Array.data[0]

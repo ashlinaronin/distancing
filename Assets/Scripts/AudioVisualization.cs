@@ -13,7 +13,9 @@ public class AudioVisualization : MonoBehaviour
 
     public float playedSeconds = 0f;
 
-    bool visited = false;
+    public GameObject mainCamera;
+
+    private bool visited = false;
 
     private const int listeningThreshold = 25;
 
@@ -35,7 +37,7 @@ public class AudioVisualization : MonoBehaviour
 
     void Update()
     {
-        var isPlayerClose = CheckCloseToTag("MainCamera", listeningThreshold);
+        var isPlayerClose = CheckCloseToCamera(listeningThreshold);
 
         // if player isn't close, we don't want to do anything else
         if (!isPlayerClose) return;
@@ -77,16 +79,8 @@ public class AudioVisualization : MonoBehaviour
         return audioSource ? (int)Math.Ceiling(audioSource.clip.length) : 0;
     }
 
-    bool CheckCloseToTag(string tag, float minimumDistance)
+    bool CheckCloseToCamera(float minimumDistance)
     {
-        GameObject[] goWithTag = GameObject.FindGameObjectsWithTag(tag);
-    
-        for (int i = 0; i < goWithTag.Length; ++i)
-        {
-            if (Vector3.Distance(transform.position, goWithTag[i].transform.position) <= minimumDistance)
-                return true;
-        }
-    
-        return false;
+        return Vector3.Distance(transform.position, mainCamera.transform.position) <= minimumDistance;
     }
 }
